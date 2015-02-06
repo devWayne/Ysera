@@ -1,5 +1,5 @@
 {
-    "name": "Ysera",
+    "name": "Xsera",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
@@ -8,7 +8,10 @@
         "koa-router": "^3.8.0",
         "koa-logger": "^1.2.2",
         "co-body": "^1.0.0",
-	"mongoose": "3.8.16"
+        "mongoose": "3.8.16"
+    },
+    "engines": {
+        "node": ">= 0.11.13"
     },
     "devDependencies": {},
     "scripts": {
@@ -16,12 +19,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/devWayne/Ysera.git"
+        "url": "https://github.com/devWayne/Xsera.git"
     },
     "author": "Vi",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/devWayne/Ysera/issues"
+        "url": "https://github.com/devWayne/Xsera/issues"
     },
-    "homepage": "https://github.com/devWayne/Ysera"
+    "homepage": "https://github.com/devWayne/Xsera"
 }

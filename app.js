@@ -10,8 +10,6 @@ var app = koa();
 
 // x-response-time
 
-app.use(router(app));
-
 app.use(function *(next){
   var start = new Date;
   yield next;
