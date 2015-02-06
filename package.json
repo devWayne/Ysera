@@ -1,26 +1,27 @@
 {
-  "name": "Ysera",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "dependencies": {
-    "koa": "*",
-    "koa-logger":"*",
-    "koa-route":"*",
-    "co-body":"*"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/devWayne/Ysera.git"
-  },
-  "author": "Vi",
-  "license": "MIT"
-,  "bugs": {
-    "url": "https://github.com/devWayne/Ysera/issues"
-  },
-  "homepage": "https://github.com/devWayne/Ysera"
+    "name": "Ysera",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+        "koa": "^0.16.0",
+        "koa-router": "^3.8.0",
+        "koa-logger": "^1.2.2",
+        "co-body": "^1.0.0",
+	"mongoose": "3.8.16"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devWayne/Ysera.git"
+    },
+    "author": "Vi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/devWayne/Ysera/issues"
+    },
+    "homepage": "https://github.com/devWayne/Ysera"
 }
