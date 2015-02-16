@@ -1,30 +1,34 @@
 {
-    "name": "Xsera",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "dependencies": {
-        "koa": "^0.16.0",
-        "koa-router": "^3.8.0",
-        "koa-logger": "^1.2.2",
-        "co-body": "^1.0.0",
-        "mongoose": "3.8.16"
-    },
-    "engines": {
-        "node": ">= 0.11.13"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/devWayne/Xsera.git"
-    },
-    "author": "Vi",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/devWayne/Xsera/issues"
-    },
-    "homepage": "https://github.com/devWayne/Xsera"
+  "name": "Xsera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "koa": "^0.16.0",
+    "koa-router": "^3.8.0",
+    "koa-logger": "^1.2.2",
+    "co-body": "^1.0.0",
+    "mongoose": "3.8.16",
+    "koa-jsonp": "~0.1.2",
+    "koa-static": "~1.4.9",
+    "koa-bodyparser": "~1.3.1",
+    "co-views": "~0.3.0"
+  },
+  "engines": {
+    "node": ">= 0.11.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devWayne/Xsera.git"
+  },
+  "author": "Vi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devWayne/Xsera/issues"
+  },
+  "homepage": "https://github.com/devWayne/Xsera"
 }

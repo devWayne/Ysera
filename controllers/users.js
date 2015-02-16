@@ -3,7 +3,7 @@ var crypto = require('crypto'),
     algorithm = 'aes-256-ctr',
     password = config.crypto_password;
 
-var User =require('../models/user');
+var User = require("mongoose").model("User");
 
 function encrypt(text) {
     var cipher = crypto.createCipher(algorithm, password)
@@ -23,16 +23,9 @@ function decrypt(text) {
 /**
  * Create a User
  */
-exports.creat = function(req, res) {
+exports.creat = function *() {
     var user = new User(req.body);
-    user.save(function(err) {
-        if (err) return res.json({
-            code: 500,
-            msg: err.message
-        });
-        res.json({
-            code: 200
-        });
+    user =yield user.save(function(err) {
     });
 };
 

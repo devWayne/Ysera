@@ -45,7 +45,7 @@ var XSchema = new Schema({
  * Methods
  */
 
-UserSchema.methods = {
+XSchema.methods = {
 
 };
 

@@ -1,8 +1,10 @@
 /**
  * Login
  */
-exports.login = function(req, res) {
-	
+exports.login = function *() {
+
+ this.body = 'Hello World';
+ this.status = 200;
 };
 
 /*
