@@ -1,32 +1,31 @@
-var config = require('../config');
-var crypto = require('crypto'),
-    algorithm = 'aes-256-ctr',
-    password = config.crypto_password;
-
 var User = require("mongoose").model("User");
 
-function encrypt(text) {
-    var cipher = crypto.createCipher(algorithm, password)
-    var crypted = cipher.update(text, 'utf8', 'hex')
-    crypted += cipher.final('hex');
-    return crypted;
-}
-
-function decrypt(text) {
-    var decipher = crypto.createDecipher(algorithm, password)
-    var dec = decipher.update(text, 'hex', 'utf8')
-    dec += decipher.final('utf8');
-    return dec;
-}
-
+var Validate = require('./validate');
 
 /**
  * Create a User
  */
-exports.creat = function *() {
-    var user = new User(req.body);
-    user =yield user.save(function(err) {
-    });
+exports.createUser = function*() {
+    if (Validate.userValidate(this.request.body)) {
+        this.throw(Validate.userValidate(this.request.body),400);
+    } else {
+	var _user={};
+        _user.hashed_password = Validate.encrypt(this.request.body.password);
+    }
+    try {
+        var user = new User(_user);
+        user =
+            yield user.save();
+    } catch (err) {
+        this.throw(err);
+    }
+    this.status = 200;
+    this.body = {
+        user: user
+    };
 };
 
+exports.readInfo = function*() {
 
+
+}

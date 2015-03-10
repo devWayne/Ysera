@@ -10,7 +10,7 @@ exports.login = function *() {
 /*
  * Logout
  */
-exports.logout = function(req, res) {
+exports.logout = function *() {
     delete req.session.user_id;
     res.json({
         code: 200

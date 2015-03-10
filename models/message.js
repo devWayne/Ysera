@@ -7,12 +7,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var User = require('./user');
+var User = require("mongoose").model("User");
+
 /**
  * User Schema
  */
 
-var XSchema = new Schema({
+var MsgSchema = new Schema({
     content: {
         type: String,
         trim: true,
@@ -49,4 +50,4 @@ XSchema.methods = {
 
 };
 
-mongoose.model('X', XSchema);
+mongoose.model('Msg', MsgSchema);

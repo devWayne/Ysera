@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var koaStatic = require("koa-static");
 var views = require("co-views");
 var bodyParser = require("koa-bodyparser");
+var json = require('koa-json');
 
 var fs=require("fs");
 
@@ -35,6 +36,7 @@ var app = koa();
 
 // Middleware
 app.use(logger());
+app.use(json());
 app.use(koaStatic(__dirname + "/public"));
 app.use(bodyParser());
 app.use(router(app));
