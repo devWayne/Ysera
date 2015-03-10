@@ -1,5 +1,6 @@
 var User = require("mongoose").model("User");
 
+
 var Validate = require('./validate');
 
 /**
@@ -10,12 +11,16 @@ exports.createUser = function*() {
         this.throw(Validate.userValidate(this.request.body),400);
     } else {
 	var _user={};
+	_user.nickname=this.body.nickname;
         _user.hashed_password = Validate.encrypt(this.request.body.password);
+	_user.email=this.body.email;
+	_user.username=this.body.username;
     }
     try {
         var user = new User(_user);
         user =
             yield user.save();
+	this.session.nickname=user.nickname;
     } catch (err) {
         this.throw(err);
     }
@@ -25,7 +30,8 @@ exports.createUser = function*() {
     };
 };
 
+
 exports.readInfo = function*() {
 
-
+	
 }

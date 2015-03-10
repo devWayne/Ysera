@@ -1,16 +1,16 @@
-var authController = require('./controllers/auth');
+var authCtrl = require('./controllers/auth');
 var userCtrl= require('./controllers/users');
 
 
 module.exports = function(app) {
 
     //User
-    app.all('/login', authController.login);
-    app.all('/logout', authController.logout);
-    app.all('/XList', function*() {
+    app.all('/login', authCtrl.login);
+    app.all('/logout', authCtrl.logout);
+    app.all('/msgList', function*() {
 
         this.body = {
-            Xlist: [{
+            msglist: [{
                 "author": "Pete Hunt",
                 "text": "Hey there!"
             }]

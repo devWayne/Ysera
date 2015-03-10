@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var User = require("mongoose").model("User");
+//var User = mongoose.model("User");
 
 /**
  * User Schema
@@ -22,8 +22,14 @@ var MsgSchema = new Schema({
             unique: true
         }
     },
+    comments: [{
+    body: { type : String, default : '' },
+    user: { type : Schema.Types.ObjectId, ref : 'User' },
+    createdAt: { type : Date, default : Date.now }
+    }],
     author: {
-        type: User,
+        type:mongoose.Schema.Types.ObjectId, 
+    	ref: 'User',
         required: true
     },
     like: {
@@ -46,7 +52,7 @@ var MsgSchema = new Schema({
  * Methods
  */
 
-XSchema.methods = {
+MsgSchema.methods = {
 
 };
 
