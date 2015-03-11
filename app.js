@@ -37,6 +37,7 @@ var app = koa();
 // Middleware
 app.use(logger());
 app.use(json());
+app.keys = ['some secret hurr'];
 app.use(session(app));
 app.use(koaStatic(__dirname + "/public"));
 app.use(bodyParser());

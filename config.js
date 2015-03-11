@@ -1,4 +1,4 @@
 module.exports = {
-    crtpto_password: 'Xsera',
+    crypto_password: 'Xsera',
     mongodbUrl:'mongodb://localhost/X'
 }

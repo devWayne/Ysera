@@ -17,6 +17,10 @@ module.exports = function(app) {
         };
         this.status = 200;
     });
-    app.post('/create',userCtrl.createUser);
+
+
+    //User management
+    app.post('/createuser',userCtrl.createUser);
+    app.post('/getuser',userCtrl.getUser);
 
 }
