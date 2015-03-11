@@ -17,9 +17,9 @@ exports.createUser = function*() {
         _user.username = this.request.body.username;
     }
     try {
-        var user = new User(_user);
+        //var user = new User(_user);
         user =
-            yield user.save();
+            yield User.create(_user);
          this.session.userinfo = {}
 	 this.session.userinfo.nickname=_user.nickname;
     } catch (err) {
@@ -34,7 +34,8 @@ exports.createUser = function*() {
 
 exports.getUser = function*() {
     try {
-    	var user = yield User.findOne(this.request.body).exec();
+    	var user = yield User.findOne().exec();
+	this.body=user;
     } catch (err) {
     	this.throw(err);
     }
