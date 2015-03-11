@@ -1,7 +1,9 @@
 var authCtrl = require('./controllers/auth');
-var userCtrl= require('./controllers/users');
-var msgCtrl=require('./controllers/messages');
+var userCtrl = require('./controllers/users');
+var msgCtrl = require('./controllers/messages');
 
+
+var upload = require('./utils/upload');
 
 module.exports = function(app) {
 
@@ -23,15 +25,19 @@ module.exports = function(app) {
 
 
     //User management
-    app.post('/createuser',userCtrl.createUser);
-    app.post('/getuser',userCtrl.getUser);
-	
+    app.post('/createuser', userCtrl.createUser);
+    app.post('/getuser', userCtrl.getUser);
+
     //Message management
-    app.post('/createmsg',msgCtrl.createMsg);
-    app.get('/deletemsg',msgCtrl.deleteMsg);
-    app.post('/updatemsg',msgCtrl.updateMsg);
-    app.post('/selectmsg',msgCtrl.selectMsg);
-	
+    app.post('/createmsg', msgCtrl.createMsg);
+    app.get('/deletemsg', msgCtrl.deleteMsg);
+    app.post('/updatemsg', msgCtrl.updateMsg);
+    app.post('/selectmsg', msgCtrl.selectMsg);
+
+
+
     //Comment management
-    
+
+
+    app.post('/uploadimg',upload.uploadImg);
 }
