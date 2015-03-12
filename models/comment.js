@@ -40,5 +40,5 @@ CmtSchema.methods = {
 
 };
 
-mongoose.model('Cmt', MsgSchema);
+mongoose.model('Cmt', CmtSchema);
 

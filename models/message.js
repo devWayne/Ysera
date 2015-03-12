@@ -33,12 +33,12 @@ var MsgSchema = new Schema({
     },
     like: {
         type: Number,
-        default: ''
+        default: 0
 
     },
     dislike: {
         type: Number,
-        default: ''
+        default: 0
 
     },
     createdAt: {

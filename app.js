@@ -29,6 +29,8 @@ mongoose.connection.on('error', function(err) {
 var models_path = __dirname + '/models';
     require(models_path + '/user.js');
     require(models_path + '/message.js');
+    require(models_path + '/comment.js');
+
 
 
 

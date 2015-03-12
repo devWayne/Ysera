@@ -4,7 +4,6 @@ var msgCtrl = require('./controllers/messages');
 var cmtCtrl = require('./controllers/comments');
 
 
-var upload = require('./utils/upload');
 
 module.exports = function(app) {
 

@@ -6,9 +6,12 @@ var Validate = require('./validate');
 
 
 exports.createMsg = function*() {
+    var _msg={};
+    _msg.content=this.request.body.content;
+    _msg.author= this.session.usr._id;  
     try {
         var msg =
-            yield Msg.create(this.request.body);
+            yield Msg.create(_msg);
     } catch (err) {
         this.throw(err);
     }
