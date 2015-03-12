@@ -23,9 +23,8 @@ var MsgSchema = new Schema({
         }
     },
     comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.Types.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
+        type:mongoose.Schema.Types.ObjectId, 
+    	ref: 'Cmt'
     }],
     author: {
         type:mongoose.Schema.Types.ObjectId, 

@@ -1,32 +1,57 @@
-var User = require("mongoose").model("Msg");
+var Msg = require("mongoose").model("Msg");
 
 
 var Validate = require('./validate');
 
 
-exports.createUser = function*() {
-};
-
 
 exports.createMsg = function*() {
     try {
-    	var user = yield User.findOne().exec();
-	this.body=user;
+        var msg =
+            yield Msg.create(this.request.body);
     } catch (err) {
-    	this.throw(err);
+        this.throw(err);
+    }
+    this.status = 200;
+    this.body = {
+        msg: msg
     }
 }
 
 
-exports.deleteMsg =function* (){
+exports.deleteMsg = function*() {
+    try {
+        var msg =
+            yield Msg.remove(this.request.body);
+    } catch (err) {
+        this.throw(err);
+    }
+    this.status = 200;
 
 }
-exports.updateMsg =function* (){
 
+exports.updateMsg = function*() {
+    try {
+        var msg =
+            yield Msg.findOneAndUpdate(this.request.body, update)
+    } catch (err) {
+        this.throw(err);
+    }
+    this.status = 200;
+        this.body = {
+        msg: msg
+    }
 }
 
-exports.selectMsg =function* (){
-
+exports.selectMsg = function*() {
+    try {
+    	var msg = yield Msg.findOne().exec();
+	this.body=user;
+    } catch (err) {
+    	this.throw(err);
+    }
+    this.status = 200;
+        this.body = {
+        msg: msg
+    }
 }
-
-

@@ -1,6 +1,7 @@
 var authCtrl = require('./controllers/auth');
 var userCtrl = require('./controllers/users');
 var msgCtrl = require('./controllers/messages');
+var cmtCtrl = require('./controllers/comments');
 
 
 var upload = require('./utils/upload');
@@ -37,7 +38,31 @@ module.exports = function(app) {
 
 
     //Comment management
+    app.all('/createcmt',cmtCtrl.createCmt);	
+    app.all('/deletecmt',cmtCtrl.deleteCmt);	
+    app.all('/updatecmt',cmtCtrl.updateCmt);	
+    app.all('/selectcmt',cmtCtrl.selectCmt);	
 
 
-    app.post('/uploadimg',upload.uploadImg);
+    // Upload images
+    var fs = require('fs');
+    var path = require('path');
+
+    app.post('/uploadimg', function*() {
+        // ignore non-POSTs
+        if ('POST' != this.method)  this.status = 404;;
+
+        // multipart upload
+        var parts = parse(this);
+        var part;
+
+        while (part =
+            yield parts) {
+            var stream = fs.createWriteStream(__dirname + "/uploadimgs/" + part.filename);
+            part.pipe(stream);
+            console.log('uploading %s -> %s', part.filename, stream.path);
+        }
+
+        this.status = 200;
+    });
 }

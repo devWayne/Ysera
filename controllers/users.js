@@ -18,7 +18,7 @@ exports.createUser = function*() {
     }
     try {
         //var user = new User(_user);
-        user =
+         var user =
             yield User.create(_user);
          this.session.userinfo = {}
 	 this.session.userinfo.nickname=_user.nickname;
