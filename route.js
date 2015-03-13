@@ -11,17 +11,10 @@ module.exports = function(app) {
     app.all('/login', authCtrl.login);
     app.all('/logout', authCtrl.logout);
 
-    //Message List
-    app.all('/msglist', function*() {
 
-        this.body = {
-            msglist: [{
-                "author": "Pete Hunt",
-                "text": "Hey there!"
-            }]
-        };
-        this.status = 200;
-    });
+    //Message List
+    app.all('/listmsg', msgCtrl.listMsg);
+
 
 
     //User management
@@ -33,8 +26,6 @@ module.exports = function(app) {
     app.get('/deletemsg', msgCtrl.deleteMsg);
     app.post('/updatemsg', msgCtrl.updateMsg);
     app.post('/selectmsg', msgCtrl.selectMsg);
-
-
 
     //Comment management
     app.all('/createcmt',cmtCtrl.createCmt);	

@@ -3,12 +3,22 @@ var Msg = require("mongoose").model("Msg");
 
 var Validate = require('./validate');
 
-
+exports.listMsg = function*() {
+    try {
+        var msg = yield Msg.find({}).populate('author').limit(20).exec();
+    } catch (err) {
+        this.throw(err);
+    }
+    this.status = 200;
+    this.body = {
+        msg: msg
+    }
+}
 
 exports.createMsg = function*() {
-    var _msg={};
-    _msg.content=this.request.body.content;
-    _msg.author= this.session.usr._id;  
+    var _msg = {};
+    _msg.content = this.request.body.content;
+    _msg.author = this.session.usr._id;
     try {
         var msg =
             yield Msg.create(_msg);
@@ -41,20 +51,21 @@ exports.updateMsg = function*() {
         this.throw(err);
     }
     this.status = 200;
-        this.body = {
+    this.body = {
         msg: msg
     }
 }
 
 exports.selectMsg = function*() {
     try {
-    	var msg = yield Msg.findOne().exec();
-	this.body=user;
+        var msg =
+            yield Msg.findOne().exec();
+        this.body = user;
     } catch (err) {
-    	this.throw(err);
+        this.throw(err);
     }
     this.status = 200;
-        this.body = {
+    this.body = {
         msg: msg
     }
 }
