@@ -16,6 +16,9 @@ exports.listMsg = function*() {
 }
 
 exports.createMsg = function*() {
+    if(!this.session.usr._id){
+	this.throw('未登录',400);
+    }
     var _msg = {};
     _msg.content = this.request.body.content;
     _msg.author = this.session.usr._id;
