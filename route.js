@@ -3,8 +3,6 @@ var userCtrl = require('./controllers/users');
 var msgCtrl = require('./controllers/messages');
 var cmtCtrl = require('./controllers/comments');
 
-var koaBody = require('koa-body')({multipart:true});
-
 module.exports = function(app) {
 
     //Auth
@@ -22,10 +20,12 @@ module.exports = function(app) {
     app.post('/getuser', userCtrl.getUser);
 
     //Message management
-    app.post('/createmsg',koaBody, msgCtrl.createMsg);
+    app.post('/createmsg',msgCtrl.createMsg);
     app.get('/deletemsg', msgCtrl.deleteMsg);
     app.post('/updatemsg', msgCtrl.updateMsg);
     app.post('/selectmsg', msgCtrl.selectMsg);
+    
+    app.post('/uploadimg', msgCtrl.uploadImg);
 
     //Comment management
     app.all('/createcmt',cmtCtrl.createCmt);	
@@ -33,10 +33,4 @@ module.exports = function(app) {
     app.all('/updatecmt',cmtCtrl.updateCmt);	
     app.all('/selectcmt',cmtCtrl.selectCmt);	
 
-
-    // Upload images
-    var fs = require('fs');
-    var path = require('path');
-
-    app.post('/uploadimg', msgCtrl.uploadImg);
 }

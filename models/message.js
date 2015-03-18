@@ -37,10 +37,11 @@ var MsgSchema = new Schema({
         default: 0
 
     },
-    img:[{
+    imgkey:{
         type: String,
-        trim: true
-    }],
+	trim: true,
+	required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now

@@ -5,28 +5,29 @@ var fs = require('fs');
 
 var Validate = require('./validate');
 
+var rand = require("random-key");
 
 exports.uploadImg = function*() {
     // ignore non-POSTs
     if ('POST' != this.method) this.status = 404;
-   // if (!this.request.is('multipart/*')) this.status = 404;
-        this.status = 200;
-    this.body = {
-        msg: 'upload succeed'
-    }
-
+    // if (!this.request.is('multipart/*')) this.status = 404;
     // multipart upload
     var parts = parse(this);
     var part;
-
+    var _ran = rand.generate();
+    fs.mkdirSync(__dirname + "/../uploadimgs/" + _ran);
     while (part =
         yield parts) {
-        var stream = fs.createWriteStream(__dirname + "/uploadimgs/" + part.filename);
+	if(!part.filename)break;
+        var stream = fs.createWriteStream(__dirname + "/../uploadimgs/" + _ran + '/' + part.filename);
         part.pipe(stream);
         console.log('uploading %s -> %s', part.filename, stream.path);
     }
 
-
+    this.status = 200;
+    this.body = {
+	 imgkey:_ran
+    }
 }
 exports.listMsg = function*() {
     try {
@@ -45,9 +46,10 @@ exports.createMsg = function*() {
     if (!this.session.usr._id) {
         this.throw('未登录', 400);
     }
-    this.body = JSON.stringify(this.request.body);
+    //this.body = JSON.stringify(this.request.body);
     var _msg = {};
-    _msg.content = this.request.body.fields.content;
+    _msg.content = this.request.body.content;
+    _msg.imgkey = this.request.body.imgkey
     _msg.author = this.session.usr._id;
     try {
         var msg =
@@ -55,27 +57,6 @@ exports.createMsg = function*() {
     } catch (err) {
         this.throw(err);
     }
-
-    // ignore non-POSTs
-    if ('POST' != this.method) this.status = 404;
-    if (!this.request.is('multipart/*')) this.status = 404;
-
-    // multipart upload
-    try {
-        var parts = parse(this);
-        var part;
-
-        while (part =
-            yield parts) {
-            var stream = fs.createWriteStream(__dirname + "/uploadimgs/" + msg._id + '/' + part.filename);
-            part.pipe(stream);
-            console.log('uploading %s -> %s', part.filename, stream.path);
-        }
-    } catch (err) {
-        this.throw(err);
-    }
-
-
     this.status = 200;
     this.body = {
         msg: msg
