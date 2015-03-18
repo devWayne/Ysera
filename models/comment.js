@@ -41,4 +41,3 @@ CmtSchema.methods = {
 };
 
 mongoose.model('Cmt', CmtSchema);
-

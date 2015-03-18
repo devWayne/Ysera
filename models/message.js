@@ -17,10 +17,6 @@ var MsgSchema = new Schema({
     content: {
         type: String,
         trim: true,
-        required: true,
-        index: {
-            unique: true
-        }
     },
     comments: [{
         type:mongoose.Schema.Types.ObjectId, 
@@ -41,6 +37,10 @@ var MsgSchema = new Schema({
         default: 0
 
     },
+    img:[{
+        type: String,
+        trim: true
+    }],
     createdAt: {
         type: Date,
         default: Date.now
