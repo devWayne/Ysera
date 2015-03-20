@@ -42,6 +42,10 @@ var MsgSchema = new Schema({
 	trim: true,
 	required: true
     },
+    imgfilename:[{
+    	type: String,
+	trim: true
+    }],
     createdAt: {
         type: Date,
         default: Date.now

@@ -14,25 +14,32 @@ exports.uploadImg = function*() {
     // multipart upload
     var parts = parse(this);
     var part;
-    var _ran = rand.generate();
-    fs.mkdirSync(__dirname + "/../uploadimgs/" + _ran);
+    var _ran = rand.generate(),_filename=[];
+    fs.mkdirSync(__dirname + "/../public/uploadimgs/" + _ran);
     while (part =
         yield parts) {
 	if(!part.filename)break;
-        var stream = fs.createWriteStream(__dirname + "/../uploadimgs/" + _ran + '/' + part.filename);
+        var stream = fs.createWriteStream(__dirname + "/../public/uploadimgs/" + _ran + '/' + part.filename);
         part.pipe(stream);
+	_filename.push(part.filename);
         console.log('uploading %s -> %s', part.filename, stream.path);
     }
 
     this.status = 200;
     this.body = {
+	 imgfilename:_filename,
 	 imgkey:_ran
     }
 }
+
+
 exports.listMsg = function*() {
     try {
         var msg =
             yield Msg.find({}).populate('author').limit(20).exec();
+	msg.forEach(function(v,idx){
+	    	
+	})
     } catch (err) {
         this.throw(err);
     }
@@ -49,8 +56,9 @@ exports.createMsg = function*() {
     //this.body = JSON.stringify(this.request.body);
     var _msg = {};
     _msg.content = this.request.body.content;
-    _msg.imgkey = this.request.body.imgkey
+    _msg.imgkey = this.request.body.imgkey;
     _msg.author = this.session.usr._id;
+    _msg.imgfilename=this.request.body.imgfilename;
     try {
         var msg =
             yield Msg.create(_msg);
