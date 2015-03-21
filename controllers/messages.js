@@ -3,6 +3,9 @@ var parse = require('co-busboy');
 var path = require('path');
 var fs = require('fs');
 
+var config = require('../config');
+
+
 var Validate = require('./validate');
 
 var rand = require("random-key");
@@ -14,21 +17,22 @@ exports.uploadImg = function*() {
     // multipart upload
     var parts = parse(this);
     var part;
-    var _ran = rand.generate(),_filename=[];
+    var _ran = rand.generate(),
+        _filename = [];
     fs.mkdirSync(__dirname + "/../public/uploadimgs/" + _ran);
     while (part =
         yield parts) {
-	if(!part.filename)break;
+        if (!part.filename) break;
         var stream = fs.createWriteStream(__dirname + "/../public/uploadimgs/" + _ran + '/' + part.filename);
         part.pipe(stream);
-	_filename.push(part.filename);
+        _filename.push(part.filename);
         console.log('uploading %s -> %s', part.filename, stream.path);
     }
 
     this.status = 200;
     this.body = {
-	 imgfilename:_filename,
-	 imgkey:_ran
+        imgfilename: _filename,
+        imgkey: _ran
     }
 }
 
@@ -37,9 +41,6 @@ exports.listMsg = function*() {
     try {
         var msg =
             yield Msg.find({}).populate('author').limit(20).exec();
-	msg.forEach(function(v,idx){
-	    	
-	})
     } catch (err) {
         this.throw(err);
     }
@@ -53,12 +54,11 @@ exports.createMsg = function*() {
     if (!this.session.usr._id) {
         this.throw('未登录', 400);
     }
-    //this.body = JSON.stringify(this.request.body);
     var _msg = {};
     _msg.content = this.request.body.content;
     _msg.imgkey = this.request.body.imgkey;
     _msg.author = this.session.usr._id;
-    _msg.imgfilename=this.request.body.imgfilename;
+    _msg.imgfilename = this.request.body.imgfilename;
     try {
         var msg =
             yield Msg.create(_msg);
