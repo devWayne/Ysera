@@ -12,7 +12,7 @@ var session = require('koa-session');
 var fs=require("fs");
 
 var config = require('./config');
-var authController = require('./controllers/auth');
+var authController = require('./api/auth');
 
 
 /**
@@ -46,6 +46,6 @@ app.use(bodyParser());
 app.use(router(app));
 
 // Routes
-require('./route')(app);
+require('./api_route')(app);
 
 app.listen(3000);
